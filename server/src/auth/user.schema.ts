@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { UserRole } from './user.entity';
 
-export const createUserSchema = z.object({
+export const UserSchema = z.object({
   email: z.email(),
   username: z
     .string()
@@ -15,4 +15,4 @@ export const createUserSchema = z.object({
   role: z.enum(UserRole).optional().default(UserRole.USER),
 });
 
-export type CreateUserDto = z.infer<typeof createUserSchema>;
+export type UserDto = z.infer<typeof UserSchema>;
