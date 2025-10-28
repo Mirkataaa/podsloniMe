@@ -6,6 +6,7 @@
 ---
 
 ## 🌐 Live Demo
+
 _Coming soon..._
 
 ---
@@ -13,17 +14,20 @@ _Coming soon..._
 ## 🚀 Tech Stack
 
 ### **Frontend**
+
 - ⚛️ **React 19** + **TypeScript**
 - 🎨 **Tailwind CSS** for modern UI
 - ⚡ **Vite** for fast development
 
 ### **Backend**
+
 - 🧱 **NestJS** (TypeScript)
-- 🗄️ **PostgreSQL** + **Prisma ORM**
+- 🗄️ **PostgreSQL** + **TypeORM**
 - 🔐 **JWT Authentication** (User / Broker roles)
 - ⚙️ **@nestjs/config** for environment variables
 
 ### **Dev Tools**
+
 - 🧰 ESLint + Prettier
 - 🐙 Git + GitHub
 - 🐳 Docker (optional)
@@ -47,3 +51,4 @@ real-estate-platform/
 │   └── .env
 │
 └── README.md
+```

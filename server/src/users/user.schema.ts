@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { UserRole } from './user.entity';
 
-export const UserSchema = z.object({
+export const createUserSchema = z.object({
   email: z.email(),
   username: z
     .string()
@@ -15,4 +15,14 @@ export const UserSchema = z.object({
   role: z.enum(UserRole).optional().default(UserRole.USER),
 });
 
-export type UserDto = z.infer<typeof UserSchema>;
+export type CreateUserDto = z.infer<typeof createUserSchema>;
+
+export const loginUserSchema = z.object({
+  email: z.email(),
+  password: z
+    .string()
+    .min(4, { message: 'Username must be at least 4 characters long' })
+    .max(20, { message: 'Username must be at most 20 characters long' }),
+});
+
+export type LoginUserDto = z.infer<typeof loginUserSchema>;
