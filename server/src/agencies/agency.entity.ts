@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -36,6 +37,9 @@ export class Agency {
 
   @OneToMany(() => User, (user) => user.agency)
   members: User[];
+
+  @ManyToOne(() => User, (user) => user.ownedAgencies, { nullable: true })
+  owner?: User;
 
   @CreateDateColumn()
   createdAt: Date;

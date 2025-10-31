@@ -4,6 +4,7 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -43,6 +44,9 @@ export class User {
 
   @ManyToOne(() => Agency, (agency) => agency.members, { nullable: true })
   agency?: Agency | null;
+
+  @OneToMany(() => Agency, (agency) => agency.owner)
+  ownedAgencies: Agency[];
 
   @CreateDateColumn()
   createdAt: Date;
