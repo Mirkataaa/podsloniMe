@@ -46,4 +46,8 @@ export class AgenciesService {
   async remove(id: string): Promise<void> {
     await this.agencyRepo.delete(id);
   }
+
+  async save(agency: Agency): Promise<Agency> {
+    return this.agencyRepo.save(agency);
+  }
 }

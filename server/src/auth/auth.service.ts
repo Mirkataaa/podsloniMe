@@ -51,6 +51,11 @@ export class AuthService {
       }
 
       if (role === UserRole.BROKER) {
+        const broker = await this.usersService.createUser({
+          ...baseUser,
+          isApproved: false,
+        });
+
         let agency = null;
 
         if (createNewAgency && agencyName) {
@@ -58,15 +63,18 @@ export class AuthService {
             name: agencyName,
             isApproved: false,
           });
+
+          // set owenr and save again
+          agency.owner = broker;
+          await this.agenciesService.save(agency);
+
+          broker.agency = agency;
+          await this.usersService.save(broker);
         } else if (agencyId) {
           agency = await this.agenciesService.findOne(agencyId);
+          broker.agency = agency;
+          await this.usersService.save(broker);
         }
-
-        await this.usersService.createUser({
-          ...baseUser,
-          agency,
-          isApproved: false,
-        });
 
         return;
       }
