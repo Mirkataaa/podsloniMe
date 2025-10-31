@@ -6,6 +6,7 @@ import { User } from '../users/user.entity';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from 'src/users/users.module';
+import { AgenciesModule } from 'src/agencies/agencies.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UsersModule } from 'src/users/users.module';
     }),
     TypeOrmModule.forFeature([User]),
     UsersModule,
+    AgenciesModule,
   ],
   providers: [AuthService],
   controllers: [AuthController],
