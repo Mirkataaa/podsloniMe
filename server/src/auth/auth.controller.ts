@@ -6,7 +6,7 @@ import {
   createUserSchema,
   type LoginUserDto,
   loginUserSchema,
-} from '../users/user.schema';
+} from '../users/user.dto';
 
 @Controller('auth')
 export class AuthController {

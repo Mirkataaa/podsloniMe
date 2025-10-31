@@ -6,7 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './user.schema';
+import { CreateUserDto } from './user.dto';
 import { parsePostgresUniqueError } from 'src/common/utils/parse-postgres-unique-error.util';
 
 @Injectable()

@@ -13,6 +13,9 @@ export const createUserSchema = z.object({
     .max(64, { message: 'Password must be at most 64 characters long' }),
 
   role: z.enum(UserRole).optional().default(UserRole.USER),
+  agencyName: z.string().optional(),
+  agencyId: z.string().optional(),
+  createNewAgency: z.boolean().optional(),
 });
 
 export type CreateUserDto = z.infer<typeof createUserSchema>;

@@ -1,7 +1,9 @@
+import { Agency } from 'src/agencies/agency.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -32,6 +34,15 @@ export class User {
     default: UserRole.USER,
   })
   role: UserRole;
+
+  @Column({ default: false })
+  isApproved: boolean;
+
+  @Column({ type: 'decimal', precision: 5, scale: 2, default: 0 })
+  commissionRate: number;
+
+  @ManyToOne(() => Agency, (agency) => agency.members, { nullable: true })
+  agency?: Agency | null;
 
   @CreateDateColumn()
   createdAt: Date;
