@@ -72,4 +72,25 @@ export class AgenciesService {
     });
   }
 
+  async removeMember(agencyId: string, userId: string): Promise<void> {
+    const member = await this.userRepo.findOne({ where: { id: userId } });
+
+    if (!member) {
+      throw new NotFoundException('User not found');
+    }
+
+    member.agency = null;
+    await this.userRepo.save(member);
+  }
+
+  async leaveAgency(userId: string): Promise<void> {
+    const user = await this.userRepo.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    user.agency = null;
+    await this.userRepo.save(user);
+  }
 }
