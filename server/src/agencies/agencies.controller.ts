@@ -81,5 +81,66 @@ export class AgenciesController {
     return this.agenciesService.updateAgency(id, data);
   }
 
+  async removeAgency(
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ): Promise<void> {
+    const agency = await this.agenciesService.findOne(id);
+
+    if (
+      !agency ||
+      (user.role !== UserRole.ADMIN && agency.owner?.id !== user.id)
+    ) {
+      throw new ForbiddenException('You cannot delete this agency');
+    }
+
+    return this.agenciesService.remove(id);
+  }
+
+  @UseGuards(AuthGuard())
+  @Get(':id/members')
+  async getMembers(@Param('id') id: string) {
+    const agency = await this.agenciesService.findOne(id);
+
+    if (!agency) {
+      throw new NotFoundException('Agency not found');
+    }
+
+    return agency.members;
+  }
+
+  @UseGuards(AuthGuard())
+  @Delete(':agencyId/members/:memberId')
+  async removeMember(
+    @GetUser() user: User,
+    @Param('agencyId') agencyId: string,
+    @Param('memberId') memberId: string,
+  ): Promise<void> {
+    const agency = await this.agenciesService.findOne(agencyId);
+
+    if (!agency) {
+      throw new NotFoundException('Agenct not found');
+    }
+
+    const isOwner = agency.owner?.id === user.id;
+    const isAdmin = user.role === UserRole.ADMIN;
+
+    if (!isOwner && !isAdmin) {
+      throw new ForbiddenException('You cannot remove members of this agency');
+    }
+
+    return this.agenciesService.removeMember(agencyId, memberId);
+  }
+
+  @UseGuards(AuthGuard())
+  @Delete('my/leave')
+  async leaveMyAgency(@GetUser() user: User): Promise<{ message: string }> {
+    if (!user.agency) {
+      throw new ForbiddenException('You are not part of any agency');
+    }
+
+    await this.agenciesService.leaveAgency(user.id);
+
+    return { message: 'You left the agency successfully' };
   }
 }
