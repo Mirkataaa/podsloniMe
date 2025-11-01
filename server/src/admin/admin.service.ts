@@ -11,3 +11,23 @@ export class AdminService {
     private readonly usersService: UsersService,
   ) {}
 
+  async approveAgency(id: string): Promise<Agency> {
+    const agency = await this.agenciesService.findOne(id);
+
+    if (!agency) {
+      throw new NotFoundException('Agenct not found');
+    }
+
+    agency.isApproved = true;
+    return this.agenciesService.save(agency);
+  }
+
+
+  async removeAgency(id: string): Promise<void> {
+    return this.agenciesService.remove(id);
+  }
+
+  async findPendingAgencies(): Promise<Agency[]> {
+    return this.agenciesService.findPending();
+  }
+
