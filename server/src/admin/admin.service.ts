@@ -22,6 +22,22 @@ export class AdminService {
     return this.agenciesService.save(agency);
   }
 
+  async approveBroker(id: string): Promise<{ message: string }> {
+    const user = await this.usersService.findById(id);
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (user.role !== UserRole.BROKER) {
+      return { message: `User ${user.username} dos not requre approval` };
+    }
+
+    user.isApproved = true;
+    await this.usersService.save(user);
+
+    return { message: `Broker ${user.username} has been approved` };
+  }
 
   async removeAgency(id: string): Promise<void> {
     return this.agenciesService.remove(id);
@@ -31,3 +47,7 @@ export class AdminService {
     return this.agenciesService.findPending();
   }
 
+  async removeUser(id: string): Promise<void> {
+    return this.usersService.deleteUser(id);
+  }
+}
