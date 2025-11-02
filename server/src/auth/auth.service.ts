@@ -3,13 +3,18 @@ import {
   InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { CreateUserDto, LoginUserDto } from '../users/user.dto';
+import {
+  CreateUserDto,
+  LoginReponseDto,
+  LoginUserDto,
+} from '../users/user.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
 import { UsersService } from 'src/users/users.service';
 import { UserRole } from 'src/users/user.entity';
 import { AgenciesService } from 'src/agencies/agencies.service';
+import { toUserDto } from 'src/users/user.mapper';
 
 @Injectable()
 export class AuthService {
@@ -85,9 +90,7 @@ export class AuthService {
     }
   }
 
-  async signIn(
-    authCredentialsDto: LoginUserDto,
-  ): Promise<{ accessToken: string }> {
+  async signIn(authCredentialsDto: LoginUserDto): Promise<LoginReponseDto> {
     const { email, password } = authCredentialsDto;
 
     const user = await this.usersService.findByEmail(email);
@@ -108,6 +111,6 @@ export class AuthService {
 
     const accessToken = await this.jwtService.signAsync(payload);
 
-    return { accessToken };
+    return { accessToken, user: toUserDto(user) };
   }
 }

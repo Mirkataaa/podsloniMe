@@ -4,6 +4,7 @@ import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
 import {
   type CreateUserDto,
   createUserSchema,
+  LoginReponseDto,
   type LoginUserDto,
   loginUserSchema,
 } from '../users/user.dto';
@@ -22,7 +23,7 @@ export class AuthController {
   @UsePipes(new ZodValidationPipe(loginUserSchema))
   async signIn(
     @Body() authCredentialsDto: LoginUserDto,
-  ): Promise<{ accessToken: string }> {
+  ): Promise<LoginReponseDto> {
     return await this.authService.signIn(authCredentialsDto);
   }
 }

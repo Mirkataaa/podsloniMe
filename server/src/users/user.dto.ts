@@ -29,3 +29,14 @@ export const loginUserSchema = z.object({
 });
 
 export type LoginUserDto = z.infer<typeof loginUserSchema>;
+
+export class LoginReponseDto {
+  accessToken: string;
+  user: {
+    id: string;
+    email: string;
+    username: string;
+    role: UserRole;
+    isApproved: boolean;
+  };
+}
