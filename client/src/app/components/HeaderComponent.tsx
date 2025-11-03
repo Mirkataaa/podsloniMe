@@ -1,6 +1,9 @@
 import { motion } from 'motion/react';
+import LoginModalComponent from '../features/auth/components/LoginModalComponent';
+import { useState } from 'react';
 
 export default function HeaderComponent() {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -57,6 +60,7 @@ export default function HeaderComponent() {
           <motion.button
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
+            onClick={() => setIsOpen(true)}
             className="bg-blue-600 text-white px-5 py-2 rounded-xl shadow-md hover:bg-blue-700 transition-all"
           >
             Вход
@@ -65,6 +69,7 @@ export default function HeaderComponent() {
       </motion.header>
 
       {/* MODAL */}
+      <LoginModalComponent isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );
 }
