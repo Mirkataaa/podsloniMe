@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { UserRole } from './user.entity';
+import { createAgencySchema } from 'src/agencies/agency.dto';
 
 export const createUserSchema = z.object({
   email: z.email(),
@@ -13,9 +14,9 @@ export const createUserSchema = z.object({
     .max(64, { message: 'Password must be at most 64 characters long' }),
 
   role: z.enum(UserRole).optional().default(UserRole.USER),
-  agencyName: z.string().optional(),
-  agencyId: z.string().optional(),
   createNewAgency: z.boolean().optional(),
+  agencyId: z.string().optional(),
+  agency: createAgencySchema.optional(),
 });
 
 export type CreateUserDto = z.infer<typeof createUserSchema>;
