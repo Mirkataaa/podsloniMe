@@ -15,6 +15,7 @@ import { UsersService } from 'src/users/users.service';
 import { UserRole } from 'src/users/user.entity';
 import { AgenciesService } from 'src/agencies/agencies.service';
 import { toUserDto } from 'src/users/user.mapper';
+import { Agency } from 'src/agencies/agency.entity';
 
 @Injectable()
 export class AuthService {
@@ -31,7 +32,7 @@ export class AuthService {
       password,
       role,
       agencyId,
-      agencyName,
+      agency,
       createNewAgency,
     } = authCredentialsDto;
 
@@ -61,31 +62,35 @@ export class AuthService {
           isApproved: false,
         });
 
-        let agency = null;
+        let createdAgency: Agency | null = null;
 
-        if (createNewAgency && agencyName) {
-          agency = await this.agenciesService.createAgency({
-            name: agencyName,
+        // case: create NEW agency
+        if (createNewAgency && agency) {
+          createdAgency = await this.agenciesService.createAgency({
+            ...agency,
             isApproved: false,
           });
 
-          // set owenr and save again
-          agency.owner = broker;
-          await this.agenciesService.save(agency);
+          // set owner reference
+          createdAgency.owner = broker;
+          await this.agenciesService.save(createdAgency);
 
-          broker.agency = agency;
+          broker.agency = createdAgency;
           await this.usersService.save(broker);
-        } else if (agencyId) {
-          agency = await this.agenciesService.findOne(agencyId);
-          broker.agency = agency;
-          await this.usersService.save(broker);
+        }
+
+        // case: join EXISTING agency
+        else if (agencyId) {
+          const existingAgency = await this.agenciesService.findOne(agencyId);
+          await this.usersService.update(broker.id, {
+            agency: existingAgency,
+          });
         }
 
         return;
       }
     } catch (error) {
       console.log('Registration failed:', error);
-
       throw new InternalServerErrorException('Грешка при регистрация');
     }
   }
