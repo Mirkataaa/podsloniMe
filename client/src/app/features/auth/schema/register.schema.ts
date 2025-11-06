@@ -11,11 +11,16 @@ export const createUserSchema = z.object({
     .min(6, 'Password must be at least 6 characters long')
     .max(64, 'Password must be at most 64 characters long'),
 
-  role: z.enum(['user', 'broker', 'admin']).optional().default('user'),
+  role: z.enum(['user', 'broker', 'admin']).default('user'),
 
   agencyName: z.string().optional(),
   agencyId: z.string().optional(),
   createNewAgency: z.boolean().optional(),
+  description: z.string().optional(),
+  phone: z.string().optional(),
+  emailAgency: z.email().optional(),
+  logo: z.string().optional(),
+  commissionCut: z.coerce.number().optional(),
 });
 
 export type CreateUserDto = z.infer<typeof createUserSchema>;
