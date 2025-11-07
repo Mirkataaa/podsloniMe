@@ -6,8 +6,8 @@ import { useAuthStore } from '../features/auth/store/auth.store';
 export default function HeaderComponent() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // const user = useAuthStore((s) => s.user);
-  const { user } = useAuthStore();
+  const user = useAuthStore((s) => s.user);
+  const logout = useAuthStore((s) => s.logout);
 
   return (
     <>
@@ -72,7 +72,17 @@ export default function HeaderComponent() {
               Вход
             </motion.button>
           ) : (
-            <span className="text-gray-800 font-medium">{user?.email}</span>
+            <>
+              <span className="text-gray-800 font-medium">{user?.email}</span>
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
+                onClick={logout}
+                className="bg-blue-600 text-white px-5 py-2 rounded-xl shadow-md hover:bg-blue-700 transition-all"
+              >
+                Изход
+              </motion.button>
+            </>
           )}
         </div>
       </motion.header>
