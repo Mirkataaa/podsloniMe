@@ -1,9 +1,13 @@
 import { motion } from 'motion/react';
 import LoginModalComponent from '../features/auth/components/LoginModalComponent';
 import { useState } from 'react';
+import { useAuthStore } from '../features/auth/store/auth.store';
 
 export default function HeaderComponent() {
   const [isOpen, setIsOpen] = useState(false);
+
+  // const user = useAuthStore((s) => s.user);
+  const { user } = useAuthStore();
 
   return (
     <>
@@ -57,14 +61,19 @@ export default function HeaderComponent() {
           </nav>
 
           {/* Login Button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.05 }}
-            onClick={() => setIsOpen(true)}
-            className="bg-blue-600 text-white px-5 py-2 rounded-xl shadow-md hover:bg-blue-700 transition-all"
-          >
-            Вход
-          </motion.button>
+
+          {!user ? (
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              onClick={() => setIsOpen(true)}
+              className="bg-blue-600 text-white px-5 py-2 rounded-xl shadow-md hover:bg-blue-700 transition-all"
+            >
+              Вход
+            </motion.button>
+          ) : (
+            <span className="text-gray-800 font-medium">{user?.email}</span>
+          )}
         </div>
       </motion.header>
 

@@ -142,15 +142,17 @@ export default function LoginModalComponent({
                 <div className="relative w-full">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                   <input
-                    {...registerForm.register('email')}
+                    type="email"
+                    {...loginForm.register('email')}
                     placeholder="Email"
                     className="input-icon"
                   />
                 </div>
                 <div className="relative w-full">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                   <input
-                    {...registerForm.register('password')}
+                    type="password"
+                    {...loginForm.register('password')}
                     placeholder="Password"
                     className="input-icon"
                   />
@@ -171,6 +173,7 @@ export default function LoginModalComponent({
                 <div className="relative w-full">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                   <input
+                    type="email"
                     {...registerForm.register('email')}
                     placeholder="Email"
                     className="input-icon"
@@ -180,6 +183,7 @@ export default function LoginModalComponent({
                 <div className="relative w-full">
                   <UserIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                   <input
+                    type="text"
                     {...registerForm.register('username')}
                     placeholder="Username"
                     className="input-icon"
@@ -188,6 +192,7 @@ export default function LoginModalComponent({
                 <div className="relative w-full">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                   <input
+                    type="password"
                     {...registerForm.register('password')}
                     placeholder="Password"
                     className="input-icon"
@@ -229,6 +234,7 @@ export default function LoginModalComponent({
                   <div className="relative w-full">
                     <Building className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                     <input
+                      type="text"
                       {...registerForm.register('agencyId')}
                       placeholder="Agency-Id"
                       className="input-icon"
@@ -242,6 +248,7 @@ export default function LoginModalComponent({
                     <div className="relative w-full col-span-2">
                       <Building className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                       <input
+                        type="text"
                         {...registerForm.register('agencyName')}
                         placeholder="Agency Name"
                         className="input-icon"
@@ -251,6 +258,7 @@ export default function LoginModalComponent({
                     <div className="relative w-full">
                       <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                       <input
+                        type="number"
                         {...registerForm.register('phone')}
                         placeholder="Phone"
                         className="input-icon"
@@ -260,6 +268,7 @@ export default function LoginModalComponent({
                     <div className="relative w-full">
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                       <input
+                        type="email"
                         {...registerForm.register('emailAgency')}
                         placeholder="Agency Email"
                         className="input-icon"
@@ -269,6 +278,7 @@ export default function LoginModalComponent({
                     <div className="relative w-full col-span-2">
                       <Globe className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                       <input
+                        type="url"
                         {...registerForm.register('logo')}
                         placeholder="Logo URL"
                         className="input-icon"
@@ -278,6 +288,7 @@ export default function LoginModalComponent({
                     <div className="relative w-full col-span-2">
                       <FileText className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                       <input
+                        type="text"
                         {...registerForm.register('description')}
                         placeholder="Description"
                         className="input-icon"
@@ -287,6 +298,7 @@ export default function LoginModalComponent({
                     <div className="relative w-full col-span-2">
                       <Percent className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 h-5 w-5" />
                       <input
+                        type="number"
                         {...registerForm.register('commissionCut')}
                         placeholder="Commission %"
                         className="input-icon"
