@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -73,3 +74,11 @@ export class PropertiesController {
     return this.service.update(id, body);
   }
 
+  @UseGuards(AuthGuard('jwt'), RolesGuards)
+  @Roles(UserRole.ADMIN, UserRole.BROKER)
+  @Delete('id')
+  async remove(@Param('id') id: string) {
+    await this.service.remove(id);
+    return { ok: true };
+  }
+}
