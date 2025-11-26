@@ -2,11 +2,13 @@ import {
   CanActivate,
   ExecutionContext,
   ForbiddenException,
+  Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { UserRole } from 'src/users/user.entity';
 import { RequestWithUser } from '../interfaces/request-with-user.interface';
 
+@Injectable()
 export class RolesGuards implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
 
@@ -28,7 +30,7 @@ export class RolesGuards implements CanActivate {
     }
 
     if (!requiredRoles.includes(user.role)) {
-      throw new ForbiddenException('Нямате достъп до този ресурс');
+      throw new ForbiddenException('Unauthorized');
     }
 
     return true;
