@@ -53,3 +53,15 @@ export class PropertiesService {
     return qb.getMany();
   }
 
+  async findOne(id: string): Promise<Property> {
+    const found = await this.propertiesRepo.findOne({
+      where: { id },
+      relations: ['images'],
+    });
+
+    if (!found) {
+      throw new NotFoundException('Property not found');
+    }
+    return found;
+  }
+
