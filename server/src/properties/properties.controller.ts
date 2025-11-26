@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -64,3 +66,10 @@ export class PropertiesController {
   @UseGuards(AuthGuard('jwt'), RolesGuards)
   @Roles(UserRole.ADMIN, UserRole.BROKER)
   @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body(new ZodValidationPipe(updatePropertySchema)) body: UpdatePropertyDto,
+  ) {
+    return this.service.update(id, body);
+  }
+
