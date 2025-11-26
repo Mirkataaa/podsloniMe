@@ -65,3 +65,17 @@ export class PropertiesService {
     return found;
   }
 
+  async update(id: string, data: UpdatePropertyDto): Promise<Property> {
+    const prop = await this.findOne(id);
+    Object.assign(prop, data);
+
+    if (data.price || data.area) {
+      const price = data.price ?? (prop.price as unknown as number);
+      const area = data.area ?? (prop.area as unknown as number);
+      prop.pricePerSqm =
+        price && area ? Number(price) / Number(area) : undefined;
+    }
+
+    return this.propertiesRepo.save(prop);
+  }
+
