@@ -56,3 +56,11 @@ export class PropertiesController {
     });
   }
 
+  @Get(':id')
+  async byId(@Param('id') id: string) {
+    return this.service.findOne(id);
+  }
+
+  @UseGuards(AuthGuard('jwt'), RolesGuards)
+  @Roles(UserRole.ADMIN, UserRole.BROKER)
+  @Patch(':id')
