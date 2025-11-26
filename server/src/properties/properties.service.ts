@@ -79,3 +79,7 @@ export class PropertiesService {
     return this.propertiesRepo.save(prop);
   }
 
+  async remove(id: string): Promise<void> {
+    await this.propertiesRepo.delete(id);
+  }
+}
