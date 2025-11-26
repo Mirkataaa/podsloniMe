@@ -34,3 +34,25 @@ export class PropertiesController {
     return this.service.create(body, user);
   }
 
+  @Get()
+  async list(
+    @Query('settlement')
+    settlement?: string,
+    @Query('transactionType')
+    transactionType?: string,
+    @Query('propertyType')
+    propertyType?: string,
+    @Query('minPrice')
+    minPrice?: string,
+    @Query('maxPrice')
+    maxPrice?: string,
+  ) {
+    return this.service.findAll({
+      settlement,
+      transactionType,
+      propertyType,
+      minPrice: minPrice ? Number(minPrice) : undefined,
+      maxPrice: maxPrice ? Number(maxPrice) : undefined,
+    });
+  }
+
