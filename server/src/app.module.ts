@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { AgenciesModule } from './agencies/agencies.module';
 import { AdminModule } from './admin/admin.module';
 import { PropertiesModule } from './properties/properties.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
 
@@ -37,6 +38,7 @@ import { configValidationSchema } from './config.schema';
     AgenciesModule,
     AdminModule,
     PropertiesModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
