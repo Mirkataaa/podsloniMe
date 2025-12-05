@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function HeroSection() {
   return (
     <>
@@ -14,12 +16,18 @@ export default function HeroSection() {
           </p>
 
           <div className="flex justify-center space-x-4">
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition">
+            <Link
+              to="/properties"
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition"
+            >
               Разгледай имоти
-            </button>
-            <button className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-600 hover:text-white transition">
+            </Link>
+            <Link
+              to="/add-property"
+              className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-600 hover:text-white transition"
+            >
               Добави обява
-            </button>
+            </Link>
           </div>
         </div>
       </section>

@@ -10,6 +10,10 @@ export const useAuthStore = create<AuthState>()(
         token: null,
         user: null,
 
+        isLoginModalOpen: false,
+        openLoginModal: () => set({ isLoginModalOpen: true }),
+        closeLoginModal: () => set({ isLoginModalOpen: false }),
+
         setAuth: (token: string, user: User) => {
           set({ token, user });
         },
@@ -21,7 +25,10 @@ export const useAuthStore = create<AuthState>()(
         isAdmin: () => get().user?.role === 'admin',
         isBroker: () => get().user?.role === 'broker',
       }),
-      { name: 'auth' },
+      {
+        name: 'auth',
+        partialize: (state) => ({ token: state.token, user: state.user }),
+      },
     ),
   ),
 );

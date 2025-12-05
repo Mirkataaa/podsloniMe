@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import LoginModalComponent from '../features/auth/components/LoginModalComponent';
 import { useState } from 'react';
 import { useAuthStore } from '../features/auth/store/auth.store';
+import { Link } from 'react-router-dom';
 
 export default function HeaderComponent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,9 +40,12 @@ export default function HeaderComponent() {
                 />
               </svg>
             </div>
-            <span className="text-2xl font-semibold bg-linear-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text">
+            <Link
+              to="/"
+              className="text-2xl font-semibold bg-linear-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text"
+            >
               PodsloniMe
-            </span>
+            </Link>
           </motion.div>
 
           {/* Navigation */}

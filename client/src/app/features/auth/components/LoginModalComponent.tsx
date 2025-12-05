@@ -53,6 +53,7 @@ export default function LoginModalComponent({
     try {
       const res = await authApi.login(data);
       setAuth(res.accessToken, res.user);
+      localStorage.setItem('accessToken', res.accessToken);
       onClose();
     } catch (err: any) {
       loginForm.setError('email', {
