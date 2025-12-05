@@ -1,26 +1,39 @@
-import axios from 'axios';
+import axios, {
+  AxiosError,
+  type AxiosResponse,
+  type InternalAxiosRequestConfig,
+} from 'axios';
+import { useAuthStore } from '../../features/auth/store/auth.store';
+
+const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:3000';
 
 const requester = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000,
 });
 
-requester.interceptors.request.use((config) => {
-  const token = localStorage.getItem('accessToken');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+requester.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      config.headers = config.headers || {};
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
-  return config;
-});
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
 
 requester.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  (response: AxiosResponse) => response,
+  (error: AxiosError) => {
     if (error.response?.status === 401) {
-      console.log('Unauthozxired');
+      useAuthStore.getState().logout();
+      useAuthStore.getState().openLoginModal();
     }
 
     return Promise.reject(error);
