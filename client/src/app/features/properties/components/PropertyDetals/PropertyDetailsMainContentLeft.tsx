@@ -1,5 +1,6 @@
 import type { Property } from '@/app/shared/types/property.types';
 import { Bath, Bed, CheckCircle2, MapPin, Maximize } from 'lucide-react';
+import PropertyMapDetails from './PropertyMapDetails';
 
 interface Props {
   property: Property;
@@ -79,9 +80,7 @@ export default function PropertyDetailsMainContentLeft({ property }: Props) {
       <div>
         <h2 className="text-xl font-bold text-gray-900 mb-4">Локация</h2>
         <div className="w-full h-[300px] bg-gray-100 rounded-xl flex items-center justify-center border">
-          <p className="text-gray-500">
-            Тук ще бъде картата (Google Maps / Leaflet)
-          </p>
+          <PropertyMapDetails property={property} />
         </div>
       </div>
     </div>
