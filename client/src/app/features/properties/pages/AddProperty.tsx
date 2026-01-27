@@ -16,14 +16,10 @@ export default function AddProperty() {
   const { regions, municipalities, settlements, isLoading, isUploading } =
     state;
 
-  const onError = (errors: any) => {
-    console.log('Form Errors;', errors);
-  };
-
   return (
     <div className="max-w-5xl mx-auto py-10">
       <Form {...form}>
-        <form onSubmit={(handler.submitHandler, onError)} className="space-y-8">
+        <form onSubmit={handler.submitHandler} className="space-y-8">
           <BasicInfoSection form={form} />
           <LocationSectionComp
             form={form}
