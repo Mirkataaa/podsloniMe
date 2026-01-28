@@ -42,21 +42,24 @@ export default function PropertyDetailsMainContentRight({ property }: Props) {
             <Separator className="my-6" />
 
             {/* Agent Info */}
-            {/* <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-                      <img
-                        src={property.agent.avatar}
-                        alt="Agent"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-bold text-gray-900">
-                        {property.agent.name}
-                      </p>
-                      <p className="text-sm text-gray-500">Брокер</p>
-                    </div>
-                  </div> */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center overflow-hidden border border-blue-200">
+                <span className="text-blue-600 font-bold text-lg">
+                  {property.createdBy.username[0].toUpperCase()}
+                </span>
+              </div>
+              <div>
+                <p className="font-bold text-gray-900">
+                  {property.createdBy.username}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {property.createdBy.email}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {property.createdBy.role}
+                </p>
+              </div>
+            </div>
 
             {/* Actions */}
             <div className="space-y-3">
