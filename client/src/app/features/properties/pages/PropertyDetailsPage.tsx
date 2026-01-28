@@ -4,8 +4,13 @@ import PropertyHeader from '../components/PropertyDetals/PropertyHeader';
 import PropertyDetailsGrid from '../components/PropertyDetals/PropertyDetailsGrid';
 import PropertyDetailsMainContentLeft from '../components/PropertyDetals/PropertyDetailsMainContentLeft';
 import PropertyDetailsMainContentRight from '../components/PropertyDetals/PropertyDetailsMainContentRight';
+import { useState } from 'react';
+import PropertyGalleryModal from '../components/PropertyDetals/PropertyGalleryModal';
 
 export default function PropertyDetailsPage() {
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [startIndex, setStartIndex] = useState(0);
+
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -39,7 +44,13 @@ export default function PropertyDetailsPage() {
         <PropertyHeader onBack={() => navigate(-1)} />
 
         {/* ─── 2. IMAGE GALLERY (Bento Grid) ─── */}
-        <PropertyDetailsGrid images={property.images} />
+        <PropertyDetailsGrid
+          images={property.images}
+          onOpenGallery={(i) => {
+            setStartIndex(i);
+            setIsGalleryOpen(true);
+          }}
+        />
       </div>
 
       {/* ─── 3. MAIN CONTENT ─── */}
@@ -53,6 +64,14 @@ export default function PropertyDetailsPage() {
           <PropertyDetailsMainContentRight property={property} />
         </div>
       </main>
+
+      {isGalleryOpen && (
+        <PropertyGalleryModal
+          images={property.images}
+          startIndex={startIndex}
+          onClose={() => setIsGalleryOpen(false)}
+        />
+      )}
     </div>
   );
 }

@@ -1,12 +1,14 @@
 import type { Property } from '@/app/shared/types/property.types';
 import { Button } from '@/components/ui/button';
 
-interface PropertyDetailsGridProps {
+type PropertyDetailsGridProps = {
   images: Property['images'];
-}
+  onOpenGallery: (index: number) => void;
+};
 
 export default function PropertyDetailsGrid({
   images,
+  onOpenGallery,
 }: PropertyDetailsGridProps) {
   // TODO: Fix condition rendering ??
 
@@ -23,6 +25,7 @@ export default function PropertyDetailsGrid({
       {/* Main Image */}
       <div className="md:col-span-2 md:row-span-2 relative group cursor-pointer">
         <img
+          onClick={() => onOpenGallery(0)}
           src={images[0]?.url}
           alt="Main property"
           className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
@@ -32,6 +35,7 @@ export default function PropertyDetailsGrid({
       {/* Secondary Images */}
       {images.slice(1, 5).map((img, idx) => (
         <div
+          onClick={() => onOpenGallery(idx + 1)}
           key={idx}
           className="hidden md:block relative group cursor-pointer overflow-hidden"
         >
@@ -45,6 +49,7 @@ export default function PropertyDetailsGrid({
 
       {/* View All Button */}
       <Button
+        onClick={() => onOpenGallery(0)}
         variant="secondary"
         className="absolute bottom-4 right-4 shadow-lg text-xs md:text-sm"
       >
