@@ -56,7 +56,7 @@ export class PropertiesService {
   async findOne(id: string): Promise<Property> {
     const found = await this.propertiesRepo.findOne({
       where: { id },
-      relations: ['images'],
+      relations: ['images', 'createdBy', 'createdBy.agency'],
     });
 
     if (!found) {
