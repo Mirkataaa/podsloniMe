@@ -54,7 +54,7 @@ export default function PropertyDetailsMainContentLeft({ property }: Props) {
       </div>
 
       {/* Features Grid */}
-      <div>
+      <div className="mb-10">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Характеристики</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {/* Примерни характеристики */}

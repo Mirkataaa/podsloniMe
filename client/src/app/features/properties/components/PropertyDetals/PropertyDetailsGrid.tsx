@@ -23,7 +23,7 @@ export default function PropertyDetailsGrid({
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-2 h-[300px] md:h-[450px] rounded-2xl overflow-hidden relative">
       {/* Main Image */}
-      <div className="md:col-span-2 md:row-span-2 relative group cursor-pointer">
+      <div className="md:col-span-2 md:row-span-2 relative group cursor-pointer overflow-hidden">
         <img
           onClick={() => onOpenGallery(0)}
           src={images[0]?.url}
@@ -51,9 +51,9 @@ export default function PropertyDetailsGrid({
       <Button
         onClick={() => onOpenGallery(0)}
         variant="secondary"
-        className="absolute bottom-4 right-4 shadow-lg text-xs md:text-sm"
+        className="absolute bottom-4 right-4 flex items-center rounded-full bg-white/80 backdrop-blur-md text-gray-800 shadow-md text-xs md:text-sm px-4 py-2 transition-all duration-300 ease-out hover:bg-white hover:scale-105 active:scale-95 "
       >
-        Виж всички снимки
+        <span>Виж всички снимки</span>
       </Button>
     </div>
   );
