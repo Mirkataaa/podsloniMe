@@ -1,3 +1,5 @@
+import type { Agency } from './agency.types';
+
 export type Role = 'user' | 'broker' | 'admin';
 
 export interface User {
@@ -6,5 +8,6 @@ export interface User {
   username: string;
   role: Role;
   isApproved: boolean;
+  agency?: Agency;
   // add agency & timestaps laters
 }
