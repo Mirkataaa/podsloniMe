@@ -1,6 +1,5 @@
 import type { Property } from '@/app/shared/types/property.types';
 import { Card, CardContent } from '@/components/ui/card';
-import { Separator } from '@radix-ui/react-select';
 import { useState } from 'react';
 import { PriceSection } from './DetailsRightSEction/PriceSection';
 import AgentInfoSenction from './DetailsRightSEction/AgentInfoSection';
@@ -25,8 +24,6 @@ export default function PropertyDetailsMainContentRight({ property }: Props) {
               area={property.area}
               currency={property.currency}
             />
-
-            {/* <Separator className="my-6" /> */}
 
             {/* Agent Info */}
             <AgentInfoSenction user={property.createdBy} />
